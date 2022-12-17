@@ -289,64 +289,18 @@ def process(arr, arr2):
     n,m,k = arr2
     if k>m: return no
     if k==1: return yes
-    arr.sort()
     C = Counter(arr)
-
+    count = 0
     for key in C:
-        if key>ceil(n/k): return no
+        if key==ceil(n/k):
+            count+=C[key]
+        elif key>ceil(n/k):
+            count = 1<<30
     
-    return yes
-
-    while k<=m:
-        stack = []
-        for i in range(k):
-            stack.append(arr.pop())
-        
-        mn = stack[-1]
-        
-        for ele in stack:
-            if (ele-mn) > 0:
-                insort(arr, ele-mn)
-            else:
-                m-=1
-        
+    if count <= (n-1) % k + 1:
+        return yes
     
-    
-    return yes if not arr else no
-
-
-    
-    i = k
-    while i<m:
-        #print(currmax, currmin)
-        currmax -= currmin
-        if currmax==0:
-            curr = 0
-            while i<m and curr<k:
-                currmax = max(currmax, arr[i])
-                currmin = min(currmin, arr[i])
-                D[arr[i]]+=1
-                i+=1
-                curr+=1
-            if curr>0 and curr!=k: return no
-        else:
-            curr = 0
-            tar = D[currmin]
-            del D[currmin]
-            while i<m and curr<tar:
-                currmax = max(currmax, arr[i])
-                currmin = min(currmin, arr[i])
-                D[arr[i]]+=1
-                i+=1
-                curr+=1
-
-            if curr>0 and curr!=k: return no
-    
-    currmax -= currmin
-    return yes if currmax==0 else no
-
-
-
+    return no
 
         
         
