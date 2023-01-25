@@ -6,6 +6,15 @@ I'll call it FILL THE MAXIMUM SEATS
 
 NO BETTER SOLUTION EXISTS
 
+Strong Case - 
+1
+13 4
+1 1 1 1 1 1 1 1 2 2 2 2 2
+4 4 5
+
+EXPECTED - 13
+
+
 """
 
 
