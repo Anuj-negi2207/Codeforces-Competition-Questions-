@@ -1,3 +1,15 @@
+"""
+THIS IS NP HARD PROBLEM 
+I'll call it FILL THE MAXIMUM SEATS
+------------------------
+
+
+NO BETTER SOLUTION EXISTS
+
+"""
+
+
+
 """THIS TEMPLATE belongs to anuj_negi"""
 
 #Try to use bisect in case of binary search, bisect_left, bisect_right
@@ -48,7 +60,8 @@ def process(A, C, n, m):
     Q = []
     for ele in D:
         heappush(Q, -ele)
-    
+
+
     C.sort(reverse = True)
     ans = 0
     i = 0
