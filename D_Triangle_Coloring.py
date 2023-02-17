@@ -24,7 +24,7 @@ def mapin(): return list(map(int, input().split()))
 #----------------------------------------------
 
 INF = 1<<64             #Or use 10**20
-mod = 1_000_000_007     #Or 998_244_353
+mod = 998_244_353
 yes = "YES"
 no = "NO"
 even = "EVEN"
@@ -52,21 +52,66 @@ SOME FACTS THAT CAN BE USED LATER -
 """
 
 #----------------------------------------------
+#Fast multiplication
+def fastMul(a, b, mod = 10**9 + 7):
+    t = 0
+    while(b > 0):   
 
-def process(arr, n = 1):
-    pass        
+        if (b % 2 != 0):
+            t = (t + a) % mod
+
+        a = (a + a) % mod 
+        b //= 2
+    return t % mod
+
+
+#----------------------------------------------
+#Returns P*Q^-1 % Mod
+def modInv(p, q=1, mod = 10**9 + 7):
+    expo = 0
+    expo = mod - 2
+ 
+    while (expo):
+        if (expo & 1):
+            p = (p * q) % mod
+        q = (q * q) % mod
+        expo >>= 1
+    return p
+
+#----------------------------------------------
+
+def process(arr, n):
+    ans = 1
+    for i in range(0, n, 3):
+        a, b, c = sorted(arr[i:i+3])
+        if a==b==c:
+            ans *= 3
+        elif a==b:
+            ans *= 2
+        ans %= mod
+    
+    m = n//3
+    for i in range(m, m//2, -1):
+        ans = ans * i
+        ans%=mod
+    
+    #print(ans)
+    
+    for i in range(m//2, 1, -1):
+        ans = modInv(ans, i, mod)
+    
+    return ans  
         
         
 def main():
     #T-testcases
 
-    for _ in range(intin()):
-        n = intin()
-        arr = mapin()
-        #arr = input()
-        ans = process(arr, n)
-        print(ans)
-        #print("Case #{0}: {1}".format(_+1, ans))
+    n = intin()
+    arr = mapin()
+    #arr = input()
+    ans = process(arr, n)
+    print(ans)
+    #print("Case #{0}: {1}".format(_+1, ans))
     
 
 #----------------------------------------------

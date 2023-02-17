@@ -53,8 +53,39 @@ SOME FACTS THAT CAN BE USED LATER -
 
 #----------------------------------------------
 
-def process(arr, n = 1):
-    pass        
+def process(A, B, n):
+    ans = [0]*(n+1)
+    curr = 0
+    pref = [0]
+    sweep = [0]*(n+1)
+
+    for ele in B:
+        curr+=ele
+        pref.append(curr)
+
+    add = 0
+    for i, a in enumerate(A):
+        j = bisect_left(pref, a+add)
+        if j==len(pref):
+            sweep[i]+=1
+            sweep[j-1]-=1
+        
+        else:
+            sweep[i]+=1
+            if pref[j]==a+add:
+                sweep[j]-=1
+            else:
+                sweep[j-1]-=1
+                ans[j-1] += a+add - pref[j-1]
+                
+        add += B[i]
+    
+    curr = 0
+    for i in range(n):
+        curr += sweep[i]
+        ans[i] += curr*B[i]
+    
+    return ans[:-1]
         
         
 def main():
@@ -62,10 +93,10 @@ def main():
 
     for _ in range(intin()):
         n = intin()
-        arr = mapin()
-        #arr = input()
-        ans = process(arr, n)
-        print(ans)
+        A = mapin()
+        B = mapin()
+        ans = process(A, B, n)
+        print(*ans)
         #print("Case #{0}: {1}".format(_+1, ans))
     
 

@@ -53,18 +53,35 @@ SOME FACTS THAT CAN BE USED LATER -
 
 #----------------------------------------------
 
-def process(arr, n = 1):
-    pass        
+def process(A, B, n, m):
+    c = 0
+    C = A+B[::-1]
+    #print(C)
+    for i in range(n+m-1):
+        if C[i]==C[i+1]: 
+            c+=1
+    if c<2: return yes
+    
+    c = 0
+    C = B+A[::-1]
+    #print(C)
+    for i in range(n+m-1):
+        if C[i]==C[i+1]: 
+            c+=1
+    if c<2: return yes
+    
+    if n==1 and m==1: return yes
+    return no   
         
         
 def main():
     #T-testcases
 
     for _ in range(intin()):
-        n = intin()
-        arr = mapin()
-        #arr = input()
-        ans = process(arr, n)
+        n, m = mapin()
+        A = input()
+        B = input()
+        ans = process(A, B, n, m)
         print(ans)
         #print("Case #{0}: {1}".format(_+1, ans))
     

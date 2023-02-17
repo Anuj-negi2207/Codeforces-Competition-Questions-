@@ -53,18 +53,43 @@ SOME FACTS THAT CAN BE USED LATER -
 
 #----------------------------------------------
 
-def process(arr, n = 1):
-    pass        
-        
+def process(arr, C, k):
+
+    S = set()
+    for key in list(C.keys()):
+        if key!=k and C[key]>=C[k]:
+            S.add(key)
+    #print(S)
+    if not S: return yes
+
+    next = []
+    for l,r in arr:
+        if l<=k<=r: continue
+        for key in S:
+            if l<=key<=r:
+                C[key]-=1
+            
+        next.append([l,r])
+    #print(C)
+    for key in C:
+        if key!=k and C[key]>=C[k]: return no
+    
+    return yes
         
 def main():
     #T-testcases
 
     for _ in range(intin()):
-        n = intin()
-        arr = mapin()
+        n, k = mapin()
+        arr = []
+        C = ddc(int)
+        for i in range(n):
+            l,r = mapin()
+            for j in range(l, r+1):
+                C[j]+=1
+            arr.append([l,r])
         #arr = input()
-        ans = process(arr, n)
+        ans = process(arr, C, k)
         print(ans)
         #print("Case #{0}: {1}".format(_+1, ans))
     
