@@ -53,8 +53,74 @@ SOME FACTS THAT CAN BE USED LATER -
 
 #----------------------------------------------
 
+def process2(arr, n):
+    x = min(arr)
+    ans = []
+    k = arr.index(x)
+
+    for i in range(n):
+        while arr[i]>x:
+            ans.append([i, k])
+            arr[i] = ceil(arr[i]/arr[k])
+    
+    if len(set(arr))==1:
+        print(len(ans))
+        for l,r in ans:
+            print(l+1, r+1)
+    
+    else:
+        print(-1)
+
+
+
 def process(arr, n = 1):
-    pass        
+    if len(set(arr))==1: 
+        print(0)
+        return
+
+    check = arr.count(1)
+    if 0<check<n:
+        print(-1)
+        return
+    
+    ans = []
+    if 2 in arr:
+        k = arr.index(2)
+
+    else:
+        k, l = -1, -1
+        for i in range(n):
+            for j in range(n):
+                if i!=j:    
+                    x,y = arr[i], arr[j]
+                    while x>2:
+                        x = ceil(x/y)
+                    if x==2:
+                        k, l = i, j
+                        break
+            
+            if k!=-1: break
+        
+        if k==-1: 
+            process2(arr, )
+            return
+        
+        while arr[k]>2:
+            ans.append([k, l])
+            arr[k] = ceil(arr[k]/arr[l])
+    
+    for i in range(n):
+        while arr[i]>2:
+            ans.append([i, k])
+            arr[i] = ceil(arr[i]/arr[k])
+    
+    #print(arr)
+    print(len(ans))
+    for l,r in ans:
+        print(l+1, r+1)
+    
+
+
         
         
 def main():
@@ -64,8 +130,7 @@ def main():
         n = intin()
         arr = mapin()
         #arr = input()
-        ans = process(arr, n)
-        print(ans)
+        process(arr, n)
         #print("Case #{0}: {1}".format(_+1, ans))
     
 
