@@ -55,6 +55,7 @@ SOME FACTS THAT CAN BE USED LATER -
 
 
 def process(arr, n = 1):
+    #defaultdict consumes more time
     C = [{} for i in range(26)]
     mask = (1<<26) - 1
     ans = 0
