@@ -55,7 +55,7 @@ SOME FACTS THAT CAN BE USED LATER -
 
 
 def process(arr, n = 1):
-    C = [ddc(int) for i in range(26)]
+    C = [{} for i in range(26)]
     mask = (1<<26) - 1
     ans = 0
 
@@ -71,11 +71,11 @@ def process(arr, n = 1):
         
         for i in range(26):
             if D[i]==0:
-                ans += C[i][mask^(1<<i)^curr]   #Odd length and 25 unique characters
+                ans += C[i].get(mask^(1<<i)^curr, 0)   #Odd length and 25 unique characters
         
         for i in range(26):
             if D[i]==0:
-                C[i][curr]+=1
+                C[i][curr] = C[i].get(curr, 0) + 1
     
     return ans
 
