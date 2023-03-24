@@ -138,6 +138,15 @@ class PrimeTable:
 #print(PT.get_factors(10))
 def process(arr):
     l, r = arr   
+    maxx = 0
+    while (l<<maxx) <= r:
+        maxx+=1
+    
+    ans = r//(1<<(maxx-1)) - l + 1
+    if maxx>1:
+        ans += (maxx-1)*max(0, (r//(1<<(maxx-2))//3 - l+1))
+    
+    return [maxx, ans]
     D = ddc(int)
     MAX = 0
     Cache = {}
