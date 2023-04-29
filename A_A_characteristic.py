@@ -62,7 +62,7 @@ def process(arr):
 
     for i in range(n):
         one, two = i, n-i
-        #   print(i, one*(one-1), two*(two-1))
+        #       print(i, one*(one-1), two*(two-1))
         if one*(one-1) + two*(two-1)==k:
             print(yes)
             ans = [1]*one + [-1]*two
