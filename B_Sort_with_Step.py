@@ -95,39 +95,20 @@ def change(arr, n, k, first):
     return False
 
 def process(arr, n, k = 1):
-    arr = [0] + arr
-    n+=1
-    
-    for i in range(n-k):
-        j = i
-        nex = j+k
-        while nex<n and arr[j]>arr[j+k]:
-            arr[j], arr[j+k] = arr[j+k], arr[j]
-            j = nex
-            nex = j+k
-    
-    for i in range(n-1, k, -1):
-        j = i
-        nex = j-k
-        while nex>-1 and arr[j]<arr[nex]:
-            arr[j], arr[nex] = arr[nex], arr[j]
-            j = nex
-            nex = j-k
+    check = 0
 
-    if sorted(arr)==arr:
-        return 0
+    for i in range(k):
+        vis = set()
+        for j in range(i, n, k):
+            vis.add(arr[j])
+        
+        for j in range(i, n, k):
+            if (j+1) not in vis:
+                check += 1
     
-    print(arr)
-    def find(x):
-        if parent[x]!=x: parent[x] = find(parent[arr[x]])
-        return parent[x]
-
-    parent = list(range(n))
-    for i in range(n):
-        parent[i] = find(parent[arr[i]])
-
-    print(parent)
+    if check<3: return max(0, check-1)
     return -1
+
             
         
         
