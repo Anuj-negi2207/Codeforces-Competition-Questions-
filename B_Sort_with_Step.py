@@ -52,47 +52,6 @@ SOME FACTS THAT CAN BE USED LATER -
 """
 
 #----------------------------------------------
-#For Minimum Swaps to sort
-def sortArrayMinSwap(arr, n):
-    #O(nlogn)
-    ans = 0
-    Another = {ele:i for i, ele in enumerate(sorted(arr))}
-    complete = [True]*n
-    
-    for j in range(n):
-        i = j
-        curr = 0
-        while complete[i]:
-            complete[i] = False
-            i = Another[arr[i]]
-            curr+=1
-        
-        if curr>0:
-            ans += curr-1
-
-    return ans
-
-def change(arr, n, k, first):
-    arr[0], arr[first] = arr[first], arr[0]
-    for i in range(n-k):
-        j = i
-        nex = j+k
-        while nex<n and arr[j]>arr[j+k]:
-            arr[j], arr[j+k] = arr[j+k], arr[j]
-            j = nex
-            nex = j+k
-    
-    for i in range(n-1, k, -1):
-        j = i
-        nex = j-k
-        while nex>-1 and arr[j]<arr[nex]:
-            arr[j], arr[nex] = arr[nex], arr[j]
-            j = nex
-            nex = j-k
-
-    if sorted(arr)==arr:
-        return True
-    return False
 
 def process(arr, n, k = 1):
     check = 0
